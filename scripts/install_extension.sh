@@ -1,5 +1,17 @@
-LATEST_VERSION=$(curl -s https://api.github.com/repos/URV-teacher/arm-syntax-vscode-extension/releases/latest | grep "tag_name" | cut -d '"' -f 4)
-LATEST_VERSION=${VERSION:1}
-wget -O arm-syntax-vscode-extension.vsix \
-  https://github.com/URV-teacher/arm-syntax-vscode-extension/releases/download/v${LATEST_VERSION}/arm-syntax-vscode-extension-${LATEST_VERSION}.vsix  # Download latest release
-code --install-extension arm-syntax-vscode-extension.vsix  # Install extension
+#!/usr/bin/env bash
+# Installs the extension with the syntax highlighting of the ARM assembly of the course in VS Code, for the current
+# user. Needs VS Code (install_vscode.sh of vscode-arm-syntax-docker). Set VSIX to install a local .vsix file instead of
+# the latest release. Standalone: can be run in an Ubuntu / Debian host, and is also used by the BMDE Docker images.
+set -Eeuo pipefail
+
+REPO=URV-teacher/arm-syntax-vscode-extension
+vsix="${VSIX:-}"
+if [ -z "${vsix}" ]; then
+  version="$(wget -qO- "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | cut -d '"' -f 4)"
+  version="${version#v}"
+  vsix="/tmp/arm-syntax-vscode-extension-${version}.vsix"
+  wget -q "https://github.com/${REPO}/releases/download/v${version}/arm-syntax-vscode-extension-${version}.vsix" \
+    -O "${vsix}"
+fi
+
+code --install-extension "${vsix}" --force

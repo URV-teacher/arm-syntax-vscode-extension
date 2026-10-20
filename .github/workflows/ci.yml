@@ -1,0 +1,21 @@
+# Installs the extension built from this repository in VS Code with the install script, and tests it. The job is the
+# reusable workflow of the bmde repository, shared by all the components.
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  host:
+    uses: URV-teacher/bmde/.github/workflows/component-host.yml@master
+    with:
+      setup: |
+        wget -q https://raw.githubusercontent.com/URV-teacher/vscode-arm-syntax-docker/master/scripts/install_vscode.sh \
+          -O /tmp/install_vscode.sh
+        bash /tmp/install_vscode.sh
+        npx --yes @vscode/vsce package --out /tmp/arm-syntax-vscode-extension.vsix
+      env: VSIX=/tmp/arm-syntax-vscode-extension.vsix
+      install: install_extension.sh
+      tests: test_extension.sh
