@@ -5,3 +5,7 @@ vsc-extension-quickstart.md
 makefile
 .github/
 
+scripts/
+src/
+test/
+assets/

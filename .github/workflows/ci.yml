@@ -12,9 +12,9 @@ jobs:
     uses: URV-teacher/bmde/.github/workflows/component-host.yml@master
     with:
       setup: |
-        wget -q https://raw.githubusercontent.com/URV-teacher/vscode-arm-syntax-docker/master/scripts/install_vscode.sh \
-          -O /tmp/install_vscode.sh
-        bash /tmp/install_vscode.sh
+        git clone --depth 1 https://github.com/URV-teacher/vscode-arm-syntax-docker.git /tmp/vscode
+        /tmp/vscode/scripts/download_assets.sh vscode.deb
+        bash /tmp/vscode/src/install_vscode.sh
         npx --yes @vscode/vsce package --out /tmp/arm-syntax-vscode-extension.vsix
       env: VSIX=/tmp/arm-syntax-vscode-extension.vsix
       install: install_extension.sh

@@ -35,7 +35,9 @@ None required.
 1. Open terminal with `Ctrl` + `Alt` + `T` or by opening the Terminal application.
 2. Type the following commands:
 ```shell
-curl -o- https://raw.githubusercontent.com/URV-teacher/arm-syntax-vscode-extension/master/scripts/install_extension.sh | bash
+git clone https://github.com/URV-teacher/arm-syntax-vscode-extension.git && cd arm-syntax-vscode-extension
+scripts/download_assets.sh  # Downloads the latest release into assets/
+src/install_extension.sh
 ```
 
 ---
