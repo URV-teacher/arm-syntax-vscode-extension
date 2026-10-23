@@ -119,6 +119,10 @@ Fixed error detecting inmediate values.
 ### V0.0.6
 's' postfix included in syntax analisys
 
+### V0.0.7
+Fork published as `aleixmt.nds-arm-assembly-syntax-highlight`, with automated releases and tests for the
+[BMDE](https://github.com/URV-teacher/BMDE)
+
 ## Author
 
 Javier Mejias Reverté
