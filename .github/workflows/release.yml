@@ -9,7 +9,7 @@ on:
 jobs:
   bump-version:
     name: Bump version
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       current_version: ${{ steps.compute_version.outputs.current_version }}
 
@@ -36,7 +36,7 @@ jobs:
         
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: bump-version
 
     steps:
@@ -61,7 +61,7 @@ jobs:
         
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: 
       - bump-version 
       - build
@@ -84,7 +84,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
   publish-marketplace:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs:
       - bump-version
       - build
