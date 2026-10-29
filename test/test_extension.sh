@@ -3,3 +3,4 @@
 set -Eeuo pipefail
 
 code --list-extensions | tee /dev/stderr | grep -qi "aleixmt.nds-arm-assembly-syntax-highlight"
+echo "ARM syntax extension OK"
